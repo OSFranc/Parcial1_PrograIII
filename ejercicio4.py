@@ -1,90 +1,77 @@
-"""
-Una empresa de renta de transporte tiene varios tipos de vehículos a su
-disposición cada uno con sus características y coste de renta. La
-empresa periódicamente registra los nuevos vehículos que ingresan al
-lote para su posterior puesta en renta.
-"""
+class Vehiculo:
+    def _init_(self, tipo_de_carro, marca_del_carro, modelo, costo_al_dia):
+        self.tipo_de_carro = tipo_de_carro
+        self.marca_del_carro = marca_del_carro
+        self.modelo = modelo
+        self.costo_al_dia = costo_al_dia
+        self.disponible = True
+
+    def _str_(self):
+        disponibilidad = "Está disponible" if self.disponible else "No está disponible"
+        return f"{self.tipo_de_carro} - {self.marca_del_carro} {self.modelo} - ${self.costo_al_dia} por día ({disponibilidad})"
+
+
+class Cliente:
+    def _init_(self, nombre_del_cliente, dui):
+        self.nombre_del_cliente = nombre_del_cliente
+        self.dui = dui
+
+    def _str_(self):
+        return f"Nombre: {self.nombre_del_cliente}, DUI: {self.dui}"
+
+
 class Renta:
-    def _init_(self, marcaAuto, modeloAuto, anioAuto, colorAuto, tipoMotorAuto, 
-                 transmisionAuto, PrecioCompra, kilometrajeAuto, placaAuto, renta):
-        self.marca = marcaAuto
-        self.modelo = modeloAuto
-        self.anio = anioAuto
-        self.color = colorAuto
-        self.tipoMotor = tipoMotorAuto
-        self.transmision = transmisionAuto
-        self.precioCompra = float(PrecioCompra)
-        self.kilometraje = kilometrajeAuto
-        self.placa = placaAuto.upper()
-        self.renta = float(renta)
+    def _init_(self):
+        self.vehiculos = []
 
-    def salidaAutosNuevos(self):
-        print(f"---------------------------------------------\n"+
-              "Datos del auto: \n"+
-              "..............................................\n"+
-              f"Marca: {self.marca}\n"+
-              f"Modelo: {self.modelo}\n"+
-              f"Color: {self.color}\n"+
-              f"Tipo de motor: {self.tipoMotor}\n"+
-              f"Kilometraje: {self.kilometraje} KM\n"+
-              f"Placa: {self.placa}\n"+
-              f"Año: {self.anio}\n"+
-              f"Transmisión: {self.transmision}\n"+
-              f"Precio de Compra: {self.precioCompra}\n"+
-              f"Precio de Renta: {self.renta}\n"+
-              "..............................................\n")
+    def registrar_vehiculo(self, vehiculo):
+        self.vehiculos.append(vehiculo)
+        print(f"Vehículo {vehiculo} registrado con éxito.")
+
+    def alquilar_vehiculo(self, cliente, tipo_de_carro, dias):
+        for vehiculo in self.vehiculos:
+            if vehiculo.tipo_de_carro == tipo_de_carro and vehiculo.disponible:
+                vehiculo.disponible = False
+                costo_total = vehiculo.costo_al_dia * dias
+                print(f"\nFactura para {cliente}")
+                print(f"Vehículo alquilado: {vehiculo}")
+                print(f"Número de días: {dias}")
+                print(f"Subtotal alquiler: ${costo_total}")
+                print("¡Gracias por su renta!")
+                return
+
+        print("Vehículo no disponible o tipo de vehículo no encontrado.")
+
+    def mostrar_vehiculos(self):
+        print("\nVehículos disponibles:")
+        for vehiculo in self.vehiculos:
+            print(vehiculo)
 
 
-def registrarAuto():
-    A_marca = input("Ingrese la marca del auto: ")
-    A_modelo = input("Ingrese el modelo del auto: ")
-    A_anio = input("Ingrese el año del auto: ")
-    A_color = input("Ingrese el color del auto: ")
-    A_motor = input("Ingrese el tipo de motor del auto: ")
-    A_transmision = input("Ingrese el tipo de transmisión del auto: ")
-    A_kilometraje = input("Ingrese el kilometraje del auto: ")
-    A_placa = input("Ingrese el número de placa del auto: ")
-    A_precio = input("Ingrese el precio de compra del auto: ")
-    A_renta = input("Ingrese el precio de renta: ")
-    return Renta(A_marca, A_modelo, A_anio, A_color, A_motor,
-                 A_transmision, A_precio, A_kilometraje, A_placa, A_renta)
+if _name_ == "_main_":
+    # Creamos la instancia de la empresa que renta
+    renta = Renta()
 
+    # Registramos los carros 
+    vehiculo1 = Vehiculo(tipo_de_carro="Sedán", marca_del_carro="Toyota", modelo="Camry", costo_al_dia=40)
+    vehiculo2 = Vehiculo(tipo_de_carro="SUV", marca_del_carro="Honda", modelo="CR-V", costo_al_dia=60)
+    vehiculo3 = Vehiculo(tipo_de_carro="Camioneta", marca_del_carro="Ford", modelo="F-150", costo_al_dia=70)
 
-def registrarCliente():
-    nombre = input("Ingrese su nombre: ")
-    apellido = input("Ingrese su apellido: ")
-    edad = input("Ingrese su edad: ")
-    dui = input("Ingrese su DUI: ")
-    return nombre, apellido, edad, dui
+    renta.registrar_vehiculo(vehiculo1)
+    renta.registrar_vehiculo(vehiculo2)
+    renta.registrar_vehiculo(vehiculo3)
 
+    # Mostramos los carros disponibles
+    renta.mostrar_vehiculos()
 
-def inicial():
-    registrados = []
-    while True:
-        tipo_usuario = input("¿Es usted un cliente (Ingrese C) o administrador (Ingrese A)? ").upper()
-        if tipo_usuario == "A":
-            auto = registrarAuto()
-            registrados.append(auto)
-            auto.salidaAutosNuevos()
-        elif tipo_usuario == "C":
-            if not registrados:
-                print("No hay autos disponibles para alquilar.")
-            else:
-                nombre, apellido, edad, dui = registrarCliente()
-                print("Autos disponibles:")
-                for index, auto in enumerate(registrados):
-                    print(f"{index + 1}. {auto.marca} {auto.modelo} ({auto.anio}) - {auto.color}")
-                seleccionAuto = int(input("Ingrese el número del auto que desea alquilar: ")) - 1
-                if 0 <= seleccionAuto < len(registrados):
-                    autoSeleccionado = registrados[seleccionAuto]
-                    print("------------------------------------------"+
-                          "\nHas seleccionado el siguiente auto:")
-                    autoSeleccionado.salidaAutosNuevos()
-                    print(f"Datos del cliente:\nNombre: {nombre}\nApellido: {apellido}\nEdad: {edad}\nDUI: {dui}\n"+
-                          "------------------------------------------")
-                    break
-                else:
-                    print("Selección no válida.")
-        else:
-            print("Opción no válida. Intente nuevamente.")
-inicial()
+    # Mostramos alquilar de un carro
+    nombre_cliente = input("\nIngrese el nombre del cliente: ")
+    dui_cliente = input("Ingrese el DUI del cliente: ")
+    tipo_vehiculo = input("Ingrese el tipo de vehículo que desea alquilar (Sedán, SUV, Camioneta): ")
+    dias = int(input("Ingrese el número de días de alquiler: "))
+
+    cliente = Cliente(nombre_del_cliente=nombre_cliente, dui=dui_cliente)
+    renta.alquilar_vehiculo(cliente, tipo_vehiculo, dias)
+
+    # Mostramos carros después del alquilarlo 
+    renta.mostrar_vehiculos()

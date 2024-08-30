@@ -54,5 +54,8 @@ tarjeta1 = nuevaTarjeta()
 
 # Verificar si hay sanción al devolver el libro
 tarjeta1.calcularDiasTranscurridos()
+print("Integrante 1: Oscar Rene Palacios Franco SMSS065523")
+print("Integrante 2 : Gerson Manases Flores Quinteros SMSS040923")
+
 
 

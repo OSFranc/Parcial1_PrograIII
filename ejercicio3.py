@@ -50,7 +50,7 @@ def main():
     if 1 <= tipo_habitacion_num <= len(tipos_habitacion):
         tipo_habitacion = tipos_habitacion[tipo_habitacion_num - 1]
     else:
-        print("Opción no válida. Se seleccionará la habitación más barata (Sencilla).")
+        print("Opción no válida. Se seleccionará la habitación más económica (Sencilla).")
         tipo_habitacion = 'Sencilla'
     
     noches = int(input("Número de noches que se hospedará: "))
@@ -61,5 +61,7 @@ def main():
     
     hotel.emitir_factura(nombre, tipo_habitacion, noches, servicios_seleccionados)
 
-if __name__ == "__main__":
-    main()
+main()
+print("Integrante 1: Oscar Rene Palacios Franco SMSS065523")
+print("Integrante 2 : Gerson Manases Flores Quinteros SMSS040923")
+

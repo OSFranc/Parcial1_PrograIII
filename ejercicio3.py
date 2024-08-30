@@ -1,3 +1,10 @@
+#Se almaceno las características del hotel y las prestaciones con las que puede contar en una clase como unicos atributos 
+#luego de aborda mediante un menú principal las características de la reserva a ejecutarse por el usuario
+#Dado a que se manejan diversas opciones es mas eficiente evaluarlas mediante números (del 1 al 3 usualmente) con un If que 
+#Evalúe la respuesta, luego se recolectan los datos y se imprimirán en una función con los parámetros de las opciones seleccionadas
+#Anteriormente en el menú.
+
+
 class Hotel:
     def __init__(self):
         self.habitaciones = {
@@ -38,6 +45,7 @@ class Hotel:
         print(f"Servicios adicionales: {', '.join(servicios_seleccionados) if servicios_seleccionados else 'Ninguno'}")
         print(f"Total a pagar: ${total}")
 
+#Función de menú principal
 def main():
     hotel = Hotel()
     
@@ -64,4 +72,3 @@ def main():
 main()
 print("Integrante 1: Oscar Rene Palacios Franco SMSS065523")
 print("Integrante 2 : Gerson Manases Flores Quinteros SMSS040923")
-

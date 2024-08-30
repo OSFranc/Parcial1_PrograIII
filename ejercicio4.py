@@ -6,8 +6,17 @@ lote para su posterior puesta en renta.
  Implementa la funcionalidad de rentar los vehículos disponibles
 tomando en cuenta los datos del cliente."""
 
+#Continuando la secuencia del ejercicio 3, mediante un menú en un ciclo While tenemos 3 opciones principales 
+#Al seleccionar añadir vehículo se crea un nuevo objeto de la clase Vehículo que almacena todos los atributos de dicho vehículo
+#para usarse posteriormente, y ser llamados en un ciclo for, estos objetos se van almacenando en un array.
+#Al comenzar la renta del vehículo se llama nuevamente al ciclo for para mostrar un listado de vehículos
+#y se toma la opción del número del vehículo mostrado (Su posición en la lista)
+#Se pregunta el número de días a alquilar y se multiplica por el precio de renta del vehículo (establecido como atributo)
+
+# Lista para almacenar los vehículos
 listadoVehiculos = []
 
+# Definición de la clase Vehiculo
 class Vehiculo:
     def __init__(self, marca, modelo, año, transmision, capacidad, categoria, precioRenta):
         self.marca = marca
@@ -19,6 +28,7 @@ class Vehiculo:
         self.precioRenta = precioRenta
         self.estado = "Disponible"
     
+# Imprime los detalles del vehículo
     def datosVehiculo(self):
         print("***************** Datos del Vehículo *******************")
         print(f"Marca: {self.marca}")
@@ -29,9 +39,11 @@ class Vehiculo:
         print(f"Categoría: {self.categoria}")
         print(f"Precio de Renta (día): ${self.precioRenta}")
         
+# Actualiza el estado del vehículo a "Rentado"
     def actualizarEstado(self):
         self.estado="Rentado"
 
+ # Crea un nuevo objeto Vehiculo y lo añade a la lista
 def nuevoVehiculo():
     print("*********** Ingresar un Nuevo Vehículo ************")
     marca = input("Marca del Vehículo: ")
@@ -55,6 +67,7 @@ def nuevoVehiculo():
     listadoVehiculos.append(vehiculo)
     print("Vehículo añadido exitosamente.\n")
 
+# Función para mostrar todos los vehículos en la lista
 def mostrarVehiculos():
     if listadoVehiculos:
         print("\n*********** Lista de Vehículos ************")
@@ -63,7 +76,8 @@ def mostrarVehiculos():
             vehiculo.datosVehiculo()
     else:
         print("No hay vehículos registrados.")
-        
+
+ # Función para alquilar un vehículo
 def alquilarVehículo():
     print("A continuación, se muestran las opciones disponibles para renta: ")
     if listadoVehiculos:
@@ -87,7 +101,7 @@ def alquilarVehículo():
         
     
     
-
+ # Menú principal del programa
 def menuPrincipal():
     while True:
         print("--- Menú Principal ---")
@@ -115,6 +129,4 @@ menuPrincipal()
 print("Integrante 1: Oscar Rene Palacios Franco SMSS065523")
 print("Integrante 2 : Gerson Manases Flores Quinteros SMSS040923")
 
-    
-    
         

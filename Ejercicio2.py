@@ -1,3 +1,9 @@
+#Al igual que el ejercicio 1, el abordaje para una clase que almacene las tarjetas con la información del
+#propietario es la mas eficiente para el ejercicio, en este caso cuenta con información básica sobre el
+#portador, y si cuenta o no con un prestamo ya vigente, luego se evaluan los dias transcurridos desde 
+#el prestamo comparandolo con los días limites para portar con dicho prestamo (prestamo de 30 días por ejemplo)
+#en caso los días transcurridos sobrepasen los días habilitados, se aplica una sanción.
+
 # Creamos una lista donde se almacenan los codigos
 listaCodigos = []
 
@@ -56,6 +62,5 @@ tarjeta1 = nuevaTarjeta()
 tarjeta1.calcularDiasTranscurridos()
 print("Integrante 1: Oscar Rene Palacios Franco SMSS065523")
 print("Integrante 2 : Gerson Manases Flores Quinteros SMSS040923")
-
 
 
